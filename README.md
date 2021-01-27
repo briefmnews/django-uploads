@@ -1,4 +1,9 @@
 # django-uploads
+[![Python 3](https://img.shields.io/badge/python-3.6|3.7|3.8-blue.svg)](https://www.python.org/downloads/release/python-370/) 
+[![Django 2](https://img.shields.io/badge/django-2.x-blue.svg)](https://docs.djangoproject.com/en/2.2/)
+![Python CI](https://github.com/briefmnews/django-uploads/workflows/Python%20CI/badge.svg) 
+[![codecov](https://codecov.io/gh/briefmnews/django-uploads/branch/main/graph/badge.svg?token=ETW1Q1HOCY)](https://codecov.io/gh/briefmnews/django-uploads)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)  
 Django file uploader app. Admin users can upload and manage files in a dedicated app. 
 
 ## Installation
