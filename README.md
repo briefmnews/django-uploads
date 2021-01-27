@@ -29,3 +29,14 @@ Next, you need to run the migrations in order to update your database schema.
 ```
 python manage.py migrate
 ```
+
+## Tests
+Testing is managed by `pytest`. Required package for testing can be installed with:
+```
+make install
+```
+
+To run testing locally:
+```
+pytest
+```
