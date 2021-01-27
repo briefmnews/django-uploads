@@ -40,3 +40,6 @@ To run testing locally:
 ```
 pytest
 ```
+
+## Resources
+[django-simple-file-handler](https://github.com/jonathanrickard/django-simple-file-handler)
