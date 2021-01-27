@@ -8,7 +8,7 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="django-uploads",
-    version="0.1.0",
+    version="0.1.1",
     description="Django simple file uploader app.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -16,7 +16,7 @@ setup(
     author="Brief.me",
     author_email="tech@brief.me",
     license="MIT",
-    packages=["uploads"],
+    packages=["uploads", "uploads.signals", "uploads.migrations"],
     python_requires=">=3.6",
     install_requires=[
         "Django>=2",
