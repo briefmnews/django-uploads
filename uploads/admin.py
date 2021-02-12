@@ -8,6 +8,7 @@ from .models import Document
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ("__str__", "description", "file_absolute_url", "updated")
     readonly_fields = ("updated", "created")
+    search_fields = ("name", "description")
 
     def file_absolute_url(self, obj):
         url = f"{settings.SITE_DOMAIN}{obj.file.url}"
