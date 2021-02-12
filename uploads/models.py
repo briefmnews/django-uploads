@@ -35,6 +35,7 @@ class Document(RenameMixin, models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(null=True, blank=True)
     file = models.FileField(upload_to=upload_to)
 
     subdirectory_path = "documents/public/"

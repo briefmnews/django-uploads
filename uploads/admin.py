@@ -6,7 +6,7 @@ from .models import Document
 
 
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ("__str__", "file_absolute_url", "updated")
+    list_display = ("__str__", "description", "file_absolute_url", "updated")
     readonly_fields = ("updated", "created")
 
     def file_absolute_url(self, obj):
