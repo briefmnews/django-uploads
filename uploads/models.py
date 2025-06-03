@@ -1,4 +1,5 @@
 import logging
+import unicodedata
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.base import ContentFile
@@ -16,6 +17,10 @@ def upload_to(instance, filename):
 
 class RenameMixin(models.Model):
     def save(self, *args, **kwargs):
+        self.name = "".join(
+            c for c in unicodedata.normalize("NFD", self.name)
+            if unicodedata.category(c) != "Mn"
+        )
         saved_object = self.get_saved_object()
         if saved_object is not None:
             if self.name != saved_object.name:
