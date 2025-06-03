@@ -46,9 +46,10 @@ class DocumentAdmin(admin.ModelAdmin):
     def is_image(self, obj):
         return obj.file.name.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp'))
 
+    @admin.display(description="Lien du fichier")
     def file_absolute_url(self, obj):
         url = f"{settings.SITE_DOMAIN}{obj.file.url}"
-        return mark_safe(f"<a href='{url}' target='_BLANK'>File link</a>")
+        return mark_safe(f"<a href='{url}' target='_BLANK'>{obj.file.name.split('/')[-1]}</a>")
 
 
 admin.site.register(Document, DocumentAdmin)
