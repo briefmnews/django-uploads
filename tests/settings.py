@@ -10,3 +10,5 @@ INSTALLED_APPS = (
 )
 
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3"}}
+
+UPLOADS_WARNING_SIZE = 307200  # 300KB

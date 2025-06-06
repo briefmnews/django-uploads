@@ -14,11 +14,11 @@ class DocumentAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        if obj and obj.file.size >= settings.UPLOADS_WARNING_SIZE and self.is_image(obj):
+        if obj and obj.file.size >= settings.UPLOADS_WARNING_SIZE and obj.is_image():
             if not hasattr(request, '_document_size_warning'):
                 messages.warning(
                     request,
-                    f"Attention : Cette image fait {self.get_file_size(obj)}. Il est recommandé de ne pas dépasser {int(settings.UPLOADS_WARNING_SIZE / 1024.0)} Ko."
+                    f"Attention : Cette image fait {obj.get_file_size()}. Il est recommandé de ne pas dépasser {int(settings.UPLOADS_WARNING_SIZE / 1024.0)} Ko."
                 )
                 request._document_size_warning = True
         return form
@@ -27,24 +27,7 @@ class DocumentAdmin(admin.ModelAdmin):
         description="Taille du fichier",
     )
     def get_file_size(self, obj):
-        size = obj.file.size
-        warning = ""
-        if size >= settings.UPLOADS_WARNING_SIZE and self.is_image(obj): warning = "⚠️"
-
-        if size < 512000:
-            size = size / 1024.0
-            ext = 'Ko'
-        elif size < 4194304000:
-            size = size / 1048576.0
-            ext = 'Mo'
-        else:
-            size = size / 1073741824.0
-            ext = 'Go'
-
-        return f"{str(round(size, 2))} {ext} {warning}"
-    
-    def is_image(self, obj):
-        return obj.file.name.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp'))
+        return obj.get_file_size()
 
     @admin.display(description="Lien du fichier")
     def file_absolute_url(self, obj):

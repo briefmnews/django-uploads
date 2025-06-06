@@ -4,6 +4,7 @@ import unicodedata
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.base import ContentFile
 from django.db import models
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -66,3 +67,24 @@ class Document(RenameMixin, models.Model):
                 self.file_deleted = True
 
         super().save(*args, **kwargs)
+
+    def get_file_size(self):
+        size = self.file.size
+        warning = ""
+        if size >= settings.UPLOADS_WARNING_SIZE and self.is_image(): 
+            warning = "⚠️"
+
+        if size < 512000:
+            size = size / 1024.0
+            ext = 'Ko'
+        elif size < 4194304000:
+            size = size / 1048576.0
+            ext = 'Mo'
+        else:
+            size = size / 1073741824.0
+            ext = 'Go'
+
+        return f"{str(round(size, 2))} {ext} {warning}"
+
+    def is_image(self):
+        return self.file.name.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp'))
