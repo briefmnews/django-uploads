@@ -7,10 +7,10 @@ from .models import Document
 
 
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ("__str__", "description", "get_file_size", "file_absolute_url", "updated")
+    list_display = ("__str__", "description", "file_size", "file_absolute_url", "updated")
     readonly_fields = ("updated", "created")
     ordering = ("-updated",)
-    search_fields = ("name", "description", "get_file_size")
+    search_fields = ("name", "description")
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
@@ -23,10 +23,8 @@ class DocumentAdmin(admin.ModelAdmin):
                 request._document_size_warning = True
         return form
 
-    @admin.display(
-        description="Taille du fichier",
-    )
-    def get_file_size(self, obj):
+    @admin.display(description="Taille du fichier")
+    def file_size(self, obj):
         return obj.get_file_size()
 
     @admin.display(description="Lien du fichier")
