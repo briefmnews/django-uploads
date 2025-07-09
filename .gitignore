@@ -1,7 +1,7 @@
 .python-version
 .idea
 __pycache__
-
+django_uploads.egg-info
 .pytest_cache
 htmlcov
 .coverage
